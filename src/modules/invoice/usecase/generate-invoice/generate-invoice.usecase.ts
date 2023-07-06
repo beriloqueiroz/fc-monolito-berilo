@@ -32,7 +32,7 @@ export default class GenerateInvoiceUseCase implements UseCaseInterface {
     return {
       ...input,
       id: output.id.id,
-      total: input.items.reduce((acc, item) => acc + item.price, 0)
+      total: output.total
     };
   }
 

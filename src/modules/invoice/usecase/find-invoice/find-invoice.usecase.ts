@@ -20,7 +20,7 @@ export default class FindInvoiceUseCase implements UseCaseInterface {
       })),
       id: output.id.id,
       name: output.name,
-      total: output.items.reduce((acc, item) => acc + item.price, 0)
+      total: output.total
     }
   }
 

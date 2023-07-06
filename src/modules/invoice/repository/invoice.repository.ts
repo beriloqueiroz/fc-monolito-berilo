@@ -52,7 +52,7 @@ export default class InvoiceRepository implements InvoiceGateway {
         price: item.price,
         invoiceId: input.id.id
       })),
-      total: input.items.reduce((acc, a) => acc + a.price, 0),
+      total: input.total,
       createdAt: input.createdAt,
       updatedAt: input.updatedAt
     }, { include: [ProductModel] });
