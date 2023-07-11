@@ -64,7 +64,7 @@ export default class Product extends BaseEntity implements AggregateRoot {
   }
 
   validate() {
-    if (!this._name || this.name === "") {
+    if (!this._name || this._name === "") {
       this.notification.addError({
         context: "product-adm",
         message: "Invalid name"

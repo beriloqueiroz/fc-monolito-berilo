@@ -5,7 +5,7 @@ import Address from "../domain/address.value-object";
 import Product from "../domain/product.entity";
 import Id from "../../@shared/domain/value-object/id.value-object";
 import InvoiceRepository from "./invoice.repository";
-import { ProductModel } from "./product.model";
+import ProductInvoiceModel from "./product.model";
 
 
 describe("Invoice repository unit test", () => {
@@ -19,7 +19,7 @@ describe("Invoice repository unit test", () => {
       sync: { force: true },
     });
 
-    await sequelize.addModels([InvoiceModel, ProductModel]);
+    await sequelize.addModels([InvoiceModel, ProductInvoiceModel]);
     await sequelize.sync();
   });
 
@@ -57,7 +57,7 @@ describe("Invoice repository unit test", () => {
     const repository = new InvoiceRepository();
     await repository.save(invoice);
 
-    const result = await InvoiceModel.findOne({ include: [ProductModel] });
+    const result = await InvoiceModel.findOne({ include: [ProductInvoiceModel] });
 
     expect(result.items.length).toBe(2);
     expect(result.items[0].name).toBe("Produto 1");

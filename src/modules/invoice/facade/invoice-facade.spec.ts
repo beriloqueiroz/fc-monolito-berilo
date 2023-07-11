@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import InvoiceFacadeFactory from "../factory/facade.factory";
 import InvoiceModel from "../repository/invoice.model";
-import { ProductModel } from "../repository/product.model";
+import ProductInvoiceModel from "../repository/product.model";
 import { FindInvoiceFacadeOutputDTO, GenerateInvoiceFacadeInputDto, GenerateInvoiceFacadeOutputDto } from "./invoice-facade.interface";
 
 describe("Invoice Facade unit test", () => {
@@ -16,7 +16,7 @@ describe("Invoice Facade unit test", () => {
       sync: { force: true },
     });
 
-    await sequelize.addModels([InvoiceModel, ProductModel]);
+    await sequelize.addModels([InvoiceModel, ProductInvoiceModel]);
     await sequelize.sync();
   });
 

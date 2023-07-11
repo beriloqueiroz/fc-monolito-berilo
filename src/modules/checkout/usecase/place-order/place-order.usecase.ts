@@ -55,7 +55,15 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
             id: new Id(client.id),
             name: client.name,
             email: client.email,
-            address: client.street,
+            street: client.street,
+            city: client.city,
+            complement: client.complement,
+            document: client.document,
+            number: client.number,
+            state: client.state,
+            zipCode: client.zipCode,
+            createdAt: new Date(),
+            updatedAt: new Date()
         })
         //criar o objeto da order (client, products)
         const order = new Order({
@@ -88,7 +96,6 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
                         price: p.salesPrice,
                     })),
                 }) : null;
-
         (payment.status === "approved") && order.approved();
 
         await this._repository.addOrder(order);
