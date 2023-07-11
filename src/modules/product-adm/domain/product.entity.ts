@@ -1,6 +1,7 @@
 import BaseEntity from "../../@shared/domain/entity/base.entity";
 import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface";
 import Id from "../../@shared/domain/value-object/id.value-object";
+import NotificationError from "../../@shared/domain/notification/notification.error";
 
 type ProductProps = {
   id?: Id;
@@ -24,6 +25,10 @@ export default class Product extends BaseEntity implements AggregateRoot {
     this._description = props.description;
     this._purchasePrice = props.purchasePrice;
     this._stock = props.stock;
+    this.validate();
+    if (this.notification.hasErrors()) {
+      throw new NotificationError(this.notification.getErrors());
+    }
   }
 
   get name(): string {
@@ -56,5 +61,14 @@ export default class Product extends BaseEntity implements AggregateRoot {
 
   set purchasePrice(purchasePrice: number) {
     this._purchasePrice = purchasePrice;
+  }
+
+  validate() {
+    if (!this._name || this.name === "") {
+      this.notification.addError({
+        context: "product-adm",
+        message: "Invalid name"
+      })
+    }
   }
 }
